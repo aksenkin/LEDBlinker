@@ -13,7 +13,7 @@ TARGET = LEDTest
 TEMPLATE = app
 
 INCLUDEPATH += /usr/local/include
-
+# Mac OS X specific settings
 macx {
     #CONFIG(debug, debug|release) {
 DEFINES += _MAC_BUILD_
@@ -21,9 +21,10 @@ DEFINES += _MAC_BUILD_
 }
 
 message($$QMAKESPEC)
-
-linux-g++ {
-    message(Linux)
+# part for building for raspberry pi
+linux-rasp-pi-g++ {
+    DEFINES += _linux-rasp-pi_
+    #message(Linux)
     LIBS += -L/usr/local/lib -lwiringPi -lwiringPiDev -lpthread -lm
 }
 
