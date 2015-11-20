@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#ifndef _MAC_BUILD_
 #include "wiringPi.h"
-
+#endif
 
 #define	LED	0
 
@@ -19,8 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->blinkButton, &QPushButton::click, [=](){
         this->onBlinkButton();
     });
-
-    //wiringPiSetup () ;
+#ifndef _MAC_BUILD_
+    wiringPiSetup () ;
+#endif
 }
 
 MainWindow::~MainWindow()
@@ -42,6 +44,7 @@ void MainWindow::onDurationValueChanged(int newValue)
 
 void  MainWindow::runLoopInSeparateThread()
 {
+#ifndef _MAC_BUILD_
     for (;;)
     {
 //      digitalWrite (LED, HIGH) ;	// On
@@ -50,6 +53,7 @@ void  MainWindow::runLoopInSeparateThread()
 //      delayMicroseconds (9000) ;
       //TODO: Verify external variable to stop the looping
     }
+#endif
 }
 
 void MainWindow::onBlinkButton()

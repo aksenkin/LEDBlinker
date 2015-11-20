@@ -14,6 +14,19 @@ TEMPLATE = app
 
 INCLUDEPATH += /usr/local/include
 
+macx {
+    #CONFIG(debug, debug|release) {
+DEFINES += _MAC_BUILD_
+    #}
+}
+
+message($$QMAKESPEC)
+
+linux-g++ {
+    message(Linux)
+    LIBS += -L/usr/local/lib -lwiringPi -lwiringPiDev -lpthread -lm
+}
+
 SOURCES += main.cpp\
         mainwindow.cpp
 
@@ -21,5 +34,5 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
-LIBS += -L/usr/local/lib -lwiringPi -lwiringPiDev -lpthread -lm
+
 
