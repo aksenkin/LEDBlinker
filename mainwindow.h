@@ -7,6 +7,8 @@ namespace Ui {
 class MainWindow;
 }
 
+class LedBlinkerThread;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -19,6 +21,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    LedBlinkerThread* _blinkerThread;
 
 private slots:
     void onDutyCycleValueChanged(int newValue);

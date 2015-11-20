@@ -36,8 +36,11 @@
       <height>16</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
     <property name="maximum">
-     <number>100</number>
+     <number>99</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -115,7 +118,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

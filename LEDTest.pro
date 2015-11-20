@@ -23,15 +23,17 @@ DEFINES += _MAC_BUILD_
 message($$QMAKESPEC)
 # part for building for raspberry pi
 linux-rasp-pi-g++ {
-    DEFINES += _linux-rasp-pi_
+    DEFINES += _LINUX_RASP_PI_
     #message(Linux)
     LIBS += -L/usr/local/lib -lwiringPi -lwiringPiDev -lpthread -lm
 }
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    ledblinkerthread.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    ledblinkerthread.h
 
 FORMS    += mainwindow.ui
 
