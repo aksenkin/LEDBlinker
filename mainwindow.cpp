@@ -10,14 +10,24 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),_blinkerThread(NULL)
 {
     ui->setupUi(this);
     QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, this, &MainWindow::onDutyCycleValueChanged  );
 //    QObject::connect(ui->durationSlider, &QSlider::valueChanged, this, &MainWindow::onDurationValueChanged );
     QObject::connect(ui->durationSlider, &QSlider::valueChanged, [=](const int newValue){
-        this->onDurationValueChanged(newValue);
+       this->onDurationValueChanged(newValue);
     } );
+
+    QString stringVal = QString("%1").arg(ui->dutyCycleSlider->value(), 3);
+    //qDebug() << stringVal;
+
+    ui->dutyCycleValue->setText(stringVal);
+    stringVal = QString("%1").arg(ui->durationSlider->value(), 3);
+    //qDebug() << stringVal;
+    ui->durationValue->setText(stringVal);
+
+    //QThread::currentThread()->setObjectName("Main");
 
     bool result = QObject::connect(ui->blinkButton, &QPushButton::clicked, [=](){
         this->onBlinkButton();
@@ -50,9 +60,13 @@ void  MainWindow::runLoopInSeparateThread()
 {
     if(_blinkerThread == NULL){
         _blinkerThread = new LedBlinkerThread(this);
-        QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, this, [=](int newValue){
-              _blinkerThread->setDutyCycle(newValue);
-        });
+        QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, _blinkerThread, &LedBlinkerThread::setDutyCycle);
+        //QObject::connect(ui->durationSlider, &QSlider::valueChanged, _blinkerThread, &LedBlinkerThread::setDuration);
+
+/* this does not work there is a problem with changing value of datamember inside labda */
+//        QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, [=](int newValue) mutable {
+//            _blinkerThread->setDutyCycle(newValue);
+//        });
     }
     _blinkerThread->start();
 }
@@ -76,7 +90,6 @@ void MainWindow::onBlinkButton()
         {
             ui->blinkButton->setText("STOP");
             _blinkerThread->start();
-            //runLoopInSeparateThread();
         }
     }
 }

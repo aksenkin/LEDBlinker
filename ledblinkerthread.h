@@ -3,32 +3,46 @@
 
 #include <QObject>
 #include <QThread>
+#include <QDebug>
 
+/**
+ * @brief The LedBlinkerThread class
+ */
 class LedBlinkerThread : public QThread
 {
     Q_OBJECT
 public:
-    Q_PROPERTY(int dutyCycle READ dutyCycle WRITE setDutyCycle);
+
+    Q_PROPERTY(int dutyCycle READ dutyCycle WRITE setDutyCycle)
+    Q_PROPERTY(int duration READ duration WRITE setDuration )
     explicit LedBlinkerThread(QObject *parent = 0);
     void run() Q_DECL_OVERRIDE;
 
     // dutyCycle getter
-    int dutyCycle()
+    inline int dutyCycle()
     {
         return _dutyCycle;
     }
-    // dutyCycle setter
-    void setDutyCycle(int newValue)
+
+    inline int duration()
     {
-        this->_dutyCycle = newValue;
+        return _duration;
     }
+
+
 signals:
 
 public slots:
+    // dutyCycle setter
+    void setDutyCycle(int newValue);
+    void setDuration(int newValue);
 
 private:
     int _dutyCycle;
     int _duration;
+
+public:
+    QMutex mutex;
 };
 
 #endif // LEDBLINKERTHREAD_H
