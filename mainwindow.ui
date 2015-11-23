@@ -17,8 +17,8 @@
    <widget class="QSlider" name="durationSlider">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>110</y>
+      <x>70</x>
+      <y>130</y>
       <width>250</width>
       <height>16</height>
      </rect>
@@ -27,7 +27,7 @@
      <number>1</number>
     </property>
     <property name="maximum">
-     <number>1000</number>
+     <number>10000</number>
     </property>
     <property name="value">
      <number>10</number>
@@ -39,8 +39,8 @@
    <widget class="QSlider" name="dutyCycleSlider">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>30</y>
+      <x>70</x>
+      <y>50</y>
       <width>250</width>
       <height>16</height>
      </rect>
@@ -58,60 +58,34 @@
    <widget class="QLabel" name="dutyCycleTitle">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>10</y>
+      <x>70</x>
+      <y>30</y>
       <width>91</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Duty cycle (D)</string>
+     <string>Duty cycle (D):</string>
     </property>
    </widget>
    <widget class="QLabel" name="durationTitle">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>80</y>
-      <width>71</width>
+      <x>70</x>
+      <y>110</y>
+      <width>81</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Duration (T)</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="dutyCycleValue">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>10</y>
-      <width>53</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="durationValue">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>80</y>
-      <width>53</width>
-      <height>15</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
+     <string>Duration (T):</string>
     </property>
    </widget>
    <widget class="QPushButton" name="blinkButton">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>150</y>
+      <x>70</x>
+      <y>170</y>
       <width>251</width>
       <height>41</height>
      </rect>
@@ -123,8 +97,8 @@
    <widget class="QLabel" name="ledLabel">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>70</y>
+      <x>50</x>
+      <y>182</y>
       <width>16</width>
       <height>16</height>
      </rect>
@@ -145,8 +119,45 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLCDNumber" name="durationlcdNumber">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>100</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="segmentStyle">
+     <enum>QLCDNumber::Flat</enum>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="dutyCyclelcdNumber">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>20</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>.SF NS Text</family>
+     </font>
+    </property>
+    <property name="digitCount">
+     <number>5</number>
+    </property>
+    <property name="segmentStyle">
+     <enum>QLCDNumber::Flat</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -157,6 +168,15 @@
    </property>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>0</height>
+    </size>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -164,7 +184,17 @@
     <bool>false</bool>
    </attribute>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>0</height>
+    </size>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

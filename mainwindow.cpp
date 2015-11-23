@@ -17,17 +17,11 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QObject::connect(ui->durationSlider, &QSlider::valueChanged, this, &MainWindow::onDurationValueChanged );
     QObject::connect(ui->durationSlider, &QSlider::valueChanged, [=](const int newValue){
        this->onDurationValueChanged(newValue);
+
+        this->setFixedSize(400, 300);
     } );
-
-    QString stringVal = QString("%1").arg(ui->dutyCycleSlider->value(), 3);
-    //qDebug() << stringVal;
-
-    ui->dutyCycleValue->setText(stringVal);
-    stringVal = QString("%1").arg(ui->durationSlider->value(), 3);
-    //qDebug() << stringVal;
-    ui->durationValue->setText(stringVal);
-
-    //QThread::currentThread()->setObjectName("Main");
+    ui->dutyCyclelcdNumber->display(ui->dutyCycleSlider->value());
+    ui->durationlcdNumber->display(ui->durationSlider->value());
 
     bool result = QObject::connect(ui->blinkButton, &QPushButton::clicked, [=](){
         this->onBlinkButton();
@@ -45,15 +39,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::onDutyCycleValueChanged(int newValue)
 {
-    QString dutyCycleStringVal = QString("%1").arg(newValue, 3);
-    ui->dutyCycleValue->setText(dutyCycleStringVal);
-    _blinkerThread = NULL;
+  //  QString dutyCycleStringVal = QString("%1").arg(newValue, 3);
+  //  ui->dutyCycleValue->setText(dutyCycleStringVal);
+    ui->dutyCyclelcdNumber->display(newValue);
 }
 
 void MainWindow::onDurationValueChanged(int newValue)
 {
-    QString durationStringVal = QString("%1").arg(newValue, 3);
-    ui->durationValue->setText(durationStringVal);
+   // QString durationStringVal = QString("%1").arg(newValue, 3);
+   // ui->durationValue->setText(durationStringVal);
+    ui->durationlcdNumber->display(newValue);
 }
 
 void  MainWindow::runLoopInSeparateThread()
