@@ -13,6 +13,7 @@ LedBlinkerThread::LedBlinkerThread(QObject *parent) : QThread(parent)
     _duration = 10000;
     _dutyCycle = 1;
 #ifdef _LINUX_RASP_PI_
+    qDebug() << "wiringPi initialization";
     wiringPiSetup () ;
 #endif
 }
@@ -22,16 +23,19 @@ void LedBlinkerThread::run() {
 
     while (!QThread::currentThread()->isInterruptionRequested())
     {
-        //mutex.lock();
 #ifdef _LINUX_RASP_PI_
-
+ // mutex.lock();
         digitalWrite (LED, HIGH) ;	// On
-        delayMicroseconds (_duration*_dutyCycle/100) ;		// *1000/100 uS
+        delayMicroseconds(_duration*_dutyCycle/100);// (highLevel) ;// *1000/100 uS  (100000);//
+
+
         digitalWrite (LED, LOW) ;	// Off
-        delayMicroseconds  (_duration*(100-_dutyCycle)*10) ;
+        delayMicroseconds (_duration*(100-_dutyCycle)/100);// (lowLevel) ;
+//mutex.unlock();
 #endif
-        //mutex.unlock();
+
     }
+
 }
 
 

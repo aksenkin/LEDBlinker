@@ -14,10 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, this, &MainWindow::onDutyCycleValueChanged  );
-      QObject::connect(ui->durationSlider, &QSlider::valueChanged, this, &MainWindow::onDurationValueChanged );
-//    QObject::connect(ui->durationSlider, &QSlider::valueChanged, [=](const int newValue){
-//       this->onDurationValueChanged(newValue);
-//    } );
+ //     QObject::connect(ui->durationSlider, &QSlider::valueChanged, this, &MainWindow::onDurationValueChanged );
+    QObject::connect(ui->durationSlider, &QSlider::valueChanged, [=](const int newValue){
+       this->onDurationValueChanged(newValue);
+    } );
     this->setFixedSize(400, 300);
     ui->dutyCyclelcdNumber->display(ui->dutyCycleSlider->value());
     ui->durationlcdNumber->display(ui->durationSlider->value());
@@ -52,13 +52,16 @@ void  MainWindow::runLoopInSeparateThread()
 {
     if(_blinkerThread == NULL){
         _blinkerThread = new LedBlinkerThread(this);
-        QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, _blinkerThread, &LedBlinkerThread::setDutyCycle);
+        _blinkerThread->setDuration(ui->durationSlider->value());
+        _blinkerThread->setDutyCycle(ui->dutyCycleSlider->value());
+        qDebug()<<"Initial values: \n" << "Duration: " << ui->durationSlider->value() <<"\n Duty Cycle: " << ui->dutyCycleSlider->value();
+        //QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, _blinkerThread, &LedBlinkerThread::setDutyCycle);
         QObject::connect(ui->durationSlider, &QSlider::valueChanged, _blinkerThread, &LedBlinkerThread::setDuration);
 
 /* this does not work there is a problem with changing value of datamember inside labda */
-//        QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, [=](int newValue) mutable {
-//            _blinkerThread->setDutyCycle(newValue);
-//        });
+        QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, [=](int newValue) mutable {
+            _blinkerThread->setDutyCycle(newValue);
+        });
     }
     _blinkerThread->start();
 }
