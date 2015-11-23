@@ -14,12 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, this, &MainWindow::onDutyCycleValueChanged  );
-//    QObject::connect(ui->durationSlider, &QSlider::valueChanged, this, &MainWindow::onDurationValueChanged );
-    QObject::connect(ui->durationSlider, &QSlider::valueChanged, [=](const int newValue){
-       this->onDurationValueChanged(newValue);
-
-        this->setFixedSize(400, 300);
-    } );
+      QObject::connect(ui->durationSlider, &QSlider::valueChanged, this, &MainWindow::onDurationValueChanged );
+//    QObject::connect(ui->durationSlider, &QSlider::valueChanged, [=](const int newValue){
+//       this->onDurationValueChanged(newValue);
+//    } );
+    this->setFixedSize(400, 300);
     ui->dutyCyclelcdNumber->display(ui->dutyCycleSlider->value());
     ui->durationlcdNumber->display(ui->durationSlider->value());
 
@@ -27,9 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
         this->onBlinkButton();
     });
     qDebug()<<result;
-#ifdef _LINUX_RASP_PI_
-    wiringPiSetup () ;
-#endif
+
 }
 
 MainWindow::~MainWindow()
@@ -56,7 +53,7 @@ void  MainWindow::runLoopInSeparateThread()
     if(_blinkerThread == NULL){
         _blinkerThread = new LedBlinkerThread(this);
         QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, _blinkerThread, &LedBlinkerThread::setDutyCycle);
-        //QObject::connect(ui->durationSlider, &QSlider::valueChanged, _blinkerThread, &LedBlinkerThread::setDuration);
+        QObject::connect(ui->durationSlider, &QSlider::valueChanged, _blinkerThread, &LedBlinkerThread::setDuration);
 
 /* this does not work there is a problem with changing value of datamember inside labda */
 //        QObject::connect(ui->dutyCycleSlider, &QSlider::valueChanged, [=](int newValue) mutable {

@@ -41,7 +41,8 @@ RESOURCES += \
     resources.qrc
 
 DISTFILES += \
-    Resources/styleSheet.qss
+    Resources/styleSheet.qss \
+    launcher.sh
 
 
 

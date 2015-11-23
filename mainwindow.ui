@@ -27,7 +27,7 @@
      <number>1</number>
     </property>
     <property name="maximum">
-     <number>10000</number>
+     <number>1000000</number>
     </property>
     <property name="value">
      <number>10</number>
@@ -60,12 +60,12 @@
      <rect>
       <x>70</x>
       <y>30</y>
-      <width>91</width>
+      <width>121</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Duty cycle (D):</string>
+     <string>Duty cycle (D), %:</string>
     </property>
    </widget>
    <widget class="QLabel" name="durationTitle">
@@ -73,12 +73,12 @@
      <rect>
       <x>70</x>
       <y>110</y>
-      <width>81</width>
+      <width>111</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Duration (T):</string>
+     <string>Duration (T), uS:</string>
     </property>
    </widget>
    <widget class="QPushButton" name="blinkButton">
@@ -122,11 +122,14 @@
    <widget class="QLCDNumber" name="durationlcdNumber">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>210</x>
       <y>100</y>
-      <width>81</width>
+      <width>101</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="digitCount">
+     <number>6</number>
     </property>
     <property name="segmentStyle">
      <enum>QLCDNumber::Flat</enum>
@@ -135,9 +138,9 @@
    <widget class="QLCDNumber" name="dutyCyclelcdNumber">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>210</x>
       <y>20</y>
-      <width>81</width>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
@@ -163,7 +166,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
