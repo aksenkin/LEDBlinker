@@ -12,9 +12,12 @@ LedBlinkerThread::LedBlinkerThread(QObject *parent) : QThread(parent)
 {
     _duration = 10000;
     _dutyCycle = 1;
+
 #ifdef _LINUX_RASP_PI_
     qDebug() << "wiringPi initialization";
-    wiringPiSetup () ;
+    int result = wiringPiSetup () ;
+    qDebug() << "result is " << result;
+    pinMode(LED, OUTPUT);
 #endif
 }
 

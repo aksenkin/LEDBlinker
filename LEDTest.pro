@@ -24,7 +24,7 @@ message($$QMAKESPEC)
 # part for building for raspberry pi
 linux-rasp-pi-g++ {
     DEFINES += _LINUX_RASP_PI_
-    #message(Linux)
+    message(Linux)
     LIBS += -L/usr/local/lib -lwiringPi -lwiringPiDev -lpthread -lm
 }
 
