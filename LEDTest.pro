@@ -44,5 +44,9 @@ DISTFILES += \
     Resources/styleSheet.qss \
     launcher.sh
 
+macx {
+include(deployment.pri)
+}
+
 
 
