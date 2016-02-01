@@ -26,6 +26,7 @@ linux-rasp-pi-g++ {
     DEFINES += _LINUX_RASP_PI_
     message(Linux)
     LIBS += -L/usr/local/lib -lwiringPi -lwiringPiDev -lpthread -lm
+    include(deployment.pri)
 }
 
 SOURCES += main.cpp\
@@ -45,7 +46,7 @@ DISTFILES += \
     launcher.sh
 
 macx {
-include(deployment.pri)
+
 }
 
 
